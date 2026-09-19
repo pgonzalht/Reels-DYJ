@@ -168,6 +168,37 @@ textarea { resize: vertical; min-height: 48px; }
 .vista .boton.ancho { max-width: 400px; display: flex; margin: 0 auto; }
 .vista .nota { max-width: 400px; margin: 12px auto 0; text-align: center; }
 
+.solo-movil { display: none; }
+/* En el móvil todo más apretado para no tener que bajar tanto:
+   tipos y estilos como botones pequeños (la explicación sale debajo solo
+   de la opción elegida), miniaturas más bajas y menos aire entre pasos. */
+@media (max-width: 899px) {
+  .rejilla { padding-top: 16px; gap: 20px; }
+  h1 { font-size: 30px; margin-bottom: 4px; }
+  .entradilla { font-size: 14.5px; }
+  .paso { padding-top: 16px; margin-top: 18px; }
+  .paso > .etiqueta { margin-bottom: 10px; }
+  .estilos { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+  .estilo { padding: 9px 6px; text-align: center; border-radius: 100px; }
+  .estilo b { font-size: 17px; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .estilo span { display: none; }
+  .estilo[aria-pressed=true] { background: var(--jade); border-color: var(--jade); }
+  .estilo[aria-pressed=true] b { color: #08211D; }
+  .solo-movil { display: block; }
+  .ayuda-tipo { margin-top: 10px; padding: 9px 12px; font-size: 13.5px; }
+  .soltar { padding: 16px 12px; gap: 6px; }
+  .soltar small { font-size: 12px; }
+  .clip { grid-template-columns: 48px minmax(0, 1fr); gap: 10px; padding: 8px; }
+  .mini { width: 48px; height: 86px; }
+  .mini-boton { width: 34px; height: 34px; font-size: 14px; }
+  .clip-cuerpo { gap: 6px; }
+  input[type=text], input[type=number], textarea { padding: 8px 10px; }
+  .pastillas { gap: 6px; margin-bottom: 10px; }
+  .pastilla { padding: 7px 14px; min-height: 38px; font-size: 14px; }
+  .campo { margin-bottom: 10px; }
+  .check { margin: 2px 0 10px; }
+}
+
 /* En el móvil, los dos botones importantes siempre a mano, abajo */
 .barra-movil { display: none; }
 @media (max-width: 899px) {
@@ -218,7 +249,17 @@ textarea { resize: vertical; min-height: 48px; }
     </div>
 
     <div class="paso">
-      <p class="etiqueta"><b>2</b> · Fotos y vídeos</p>
+      <p class="etiqueta"><b>2</b> · Estilo</p>
+      <div class="estilos" id="estilos">
+        <button type="button" class="estilo" data-estilo="suave"><b>Suave</b><span>Zoom lento sobre cada foto y fundidos. Elegante.</span></button>
+        <button type="button" class="estilo" data-estilo="dinamico"><b>Dinámico</b><span>Cambios rápidos que suben con una línea verde.</span></button>
+        <button type="button" class="estilo" data-estilo="revista"><b>Revista</b><span>Foto enmarcada con el texto debajo, como una portada.</span></button>
+      </div>
+      <p class="ayuda-tipo solo-movil" id="estiloAyuda"></p>
+    </div>
+
+    <div class="paso">
+      <p class="etiqueta"><b>3</b> · Fotos y vídeos</p>
       <label class="soltar" id="soltar">
         <input type="file" id="archivos" class="oculto" accept="image/*,video/*" multiple>
         <span class="boton">Elegir fotos y vídeos</span>
@@ -229,14 +270,14 @@ textarea { resize: vertical; min-height: 48px; }
     </div>
 
     <div class="paso">
-      <p class="etiqueta"><b>3</b> · Cuánto dura el reel</p>
+      <p class="etiqueta"><b>4</b> · Cuánto dura el reel</p>
       <div class="pastillas" id="duraciones"></div>
       <label class="duracion-libre">Otra duración: <input type="number" id="durLibre" min="5" max="180" step="1" inputmode="numeric"> segundos</label>
       <p class="nota" id="reparto"></p>
     </div>
 
     <div class="paso">
-      <p class="etiqueta"><b>4</b> · Textos</p>
+      <p class="etiqueta"><b>5</b> · Textos</p>
       <label class="campo">Frase pequeña de arriba
         <input type="text" id="subtitulo" maxlength="60">
       </label>
@@ -255,14 +296,6 @@ textarea { resize: vertical; min-height: 48px; }
       </label>
     </div>
 
-    <div class="paso">
-      <p class="etiqueta"><b>5</b> · Estilo</p>
-      <div class="estilos" id="estilos">
-        <button type="button" class="estilo" data-estilo="suave"><b>Suave</b><span>Zoom lento sobre cada foto y fundidos. Elegante.</span></button>
-        <button type="button" class="estilo" data-estilo="dinamico"><b>Dinámico</b><span>Cambios rápidos que suben con una línea verde.</span></button>
-        <button type="button" class="estilo" data-estilo="revista"><b>Revista</b><span>Foto enmarcada con el texto debajo, como una portada.</span></button>
-      </div>
-    </div>
   </section>
 
   <section class="vista" aria-label="Vista previa">
@@ -630,7 +663,11 @@ $('tipos').addEventListener('click', e => {
 });
 
 function pintarEstilos() {
-  document.querySelectorAll('[data-estilo]').forEach(b => b.setAttribute('aria-pressed', b.dataset.estilo === ajustes.estilo));
+  document.querySelectorAll('[data-estilo]').forEach(b => {
+    const si = b.dataset.estilo === ajustes.estilo;
+    b.setAttribute('aria-pressed', si);
+    if (si) $('estiloAyuda').textContent = b.querySelector('span').textContent;
+  });
   $('campoCierre').style.display = ajustes.cierreActivo ? '' : 'none';
   $('campoInsta').style.display = ajustes.instaActivo ? '' : 'none';
 }
