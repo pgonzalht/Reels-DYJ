@@ -1,0 +1,1464 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Reels David &amp; Jorge</title>
+<meta name="theme-color" content="#0E0912">
+<meta name="robots" content="noindex, nofollow">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icono-180.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Reels DyJ">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230E0912'/%3E%3Cpath d='M8 6c-3 4 5 7 0 10s3 7 0 10' fill='none' stroke='%2363D6BE' stroke-width='2' stroke-linecap='round'/%3E%3Cpath d='M17 6c-3 4 5 7 0 10s3 7 0 10' fill='none' stroke='%2363D6BE' stroke-width='2' stroke-linecap='round' opacity='.6'/%3E%3Cpath d='M26 6c-3 4 5 7 0 10s3 7 0 10' fill='none' stroke='%2363D6BE' stroke-width='2' stroke-linecap='round' opacity='.3'/%3E%3C/svg%3E">
+<style>
+/*FUENTES*/
+
+/* Mismo sistema visual que la web del salón: siempre oscura, berenjena y
+   un único acento en jade. La miel solo para avisos. */
+:root {
+  color-scheme: dark;
+  --noche: #0E0912; --noche-2: #150E1B; --superficie: #1D1425;
+  --linea: #2F2239; --linea-viva: #43304F;
+  --crema: #F4EFF6; --crema-2: #B9AAC2; --crema-3: #8B7C95;
+  --jade: #63D6BE; --miel: #E4B265;
+  --sans: 'Archivo', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --serif: 'Instrument Serif', ui-serif, Georgia, serif;
+  --t: 220ms cubic-bezier(.22,.61,.36,1);
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--noche); color: var(--crema);
+  font-family: var(--sans); font-size: 16px; font-weight: 300; line-height: 1.55;
+  -webkit-font-smoothing: antialiased; overflow-x: clip;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+button, input, textarea { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--jade); outline-offset: 3px; }
+
+.cabecera {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 16px;
+  padding: calc(18px + env(safe-area-inset-top)) 16px 18px;
+  border-bottom: 1px solid var(--linea);
+  max-width: 1240px; margin: 0 auto;
+}
+.logo { font-family: var(--serif); font-size: 26px; letter-spacing: -.01em; white-space: nowrap; }
+.logo .amp { color: var(--jade); font-style: italic; }
+.etiqueta {
+  font-size: 11px; font-weight: 500; letter-spacing: .22em; text-transform: uppercase;
+  color: var(--crema-3); margin: 0;
+}
+.etiqueta.viva { color: var(--jade); }
+
+.rejilla {
+  max-width: 1240px; margin: 0 auto; padding: 24px 16px 60px;
+  display: grid; gap: 28px;
+}
+@media (min-width: 900px) {
+  .rejilla { grid-template-columns: minmax(0, 1fr) 400px; gap: 48px; padding-top: 36px; }
+  .vista { position: sticky; top: 24px; align-self: start; }
+}
+
+h1 { font-family: var(--serif); font-weight: 400; font-size: clamp(34px, 6vw, 52px); line-height: 1.02; letter-spacing: -.015em; margin: 0 0 10px; }
+h1 em { color: var(--jade); }
+.entradilla { color: var(--crema-2); margin: 0 0 8px; max-width: 52ch; }
+
+.paso { border-top: 1px solid var(--linea); padding-top: 22px; margin-top: 26px; }
+.paso > .etiqueta { margin-bottom: 14px; }
+.paso > .etiqueta b { color: var(--jade); font-weight: 500; }
+
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  padding: 13px 26px; border-radius: 100px; border: 1px solid transparent;
+  background: var(--jade); color: #08211D; font-size: 15px; font-weight: 500;
+  cursor: pointer; transition: transform var(--t), box-shadow var(--t), border-color var(--t), color var(--t);
+  text-decoration: none; min-height: 48px;
+}
+.boton:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -12px var(--jade); }
+.boton:disabled { opacity: .45; cursor: not-allowed; transform: none; box-shadow: none; }
+.boton.fantasma { background: transparent; color: var(--crema); border-color: var(--linea-viva); }
+.boton.fantasma:hover { border-color: var(--jade); color: var(--jade); box-shadow: none; }
+.boton.ancho { width: 100%; }
+
+.soltar {
+  display: flex; flex-direction: column; align-items: center; gap: 10px; text-align: center;
+  padding: 28px 16px; border: 1px dashed var(--linea-viva); border-radius: 6px;
+  background: var(--noche-2); cursor: pointer; transition: border-color var(--t), background var(--t);
+}
+.soltar.encima { border-color: var(--jade); background: var(--superficie); }
+.soltar small { color: var(--crema-3); font-size: 13px; }
+.oculto { position: absolute; width: 1px; height: 1px; opacity: 0; pointer-events: none; }
+
+.estado-carga { color: var(--crema-2); font-size: 14px; margin: 12px 0 0; min-height: 1em; }
+.estado-carga.aviso { color: var(--miel); }
+
+.lista { list-style: none; margin: 16px 0 0; padding: 0; display: grid; gap: 10px; }
+.clip {
+  display: grid; grid-template-columns: 64px minmax(0, 1fr); gap: 14px;
+  padding: 10px; border: 1px solid var(--linea); border-radius: 6px; background: var(--noche-2);
+}
+.mini { width: 64px; height: 114px; object-fit: cover; border-radius: 3px; background: var(--superficie); display: block; }
+.clip-cabeza { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+.clip-cabeza .etiqueta { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.clip-botones { display: flex; gap: 4px; flex: 0 0 auto; }
+.mini-boton {
+  width: 38px; height: 38px; border-radius: 100px; border: 1px solid var(--linea-viva);
+  background: transparent; cursor: pointer; display: grid; place-items: center; font-size: 15px; line-height: 1;
+}
+.mini-boton:hover { border-color: var(--jade); color: var(--jade); }
+.mini-boton:disabled { opacity: .3; cursor: default; }
+.clip-cuerpo { display: grid; gap: 8px; align-content: start; }
+.clip-extra { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 13.5px; color: var(--crema-2); align-items: center; }
+.clip-extra input[type=number] { width: 72px; }
+
+input[type=text], input[type=number], textarea {
+  width: 100%; background: var(--noche); border: 1px solid var(--linea-viva); border-radius: 4px;
+  padding: 10px 12px; font-size: 16px; font-weight: 400; transition: border-color var(--t);
+}
+input[type=text]:focus, input[type=number]:focus, textarea:focus { border-color: var(--jade); outline: none; }
+textarea { resize: vertical; min-height: 48px; }
+.campo { display: grid; gap: 6px; margin-bottom: 14px; font-size: 14px; color: var(--crema-2); }
+.check { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--crema); margin: 4px 0 14px; cursor: pointer; }
+.check input { width: 20px; height: 20px; accent-color: var(--jade); margin: 0; }
+.nota { font-size: 13.5px; color: var(--crema-3); margin: 0 0 14px; }
+.nota em { color: var(--jade); font-style: normal; }
+.aviso-texto { color: var(--miel); }
+
+.pastillas { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; }
+.pastilla {
+  padding: 10px 18px; border-radius: 100px; border: 1px solid var(--linea-viva);
+  background: transparent; cursor: pointer; font-size: 15px; min-height: 44px;
+  transition: border-color var(--t), background var(--t), color var(--t);
+}
+.pastilla:hover { border-color: var(--jade); }
+.pastilla[aria-pressed=true] { background: var(--jade); border-color: var(--jade); color: #08211D; font-weight: 500; }
+.duracion-libre { display: flex; align-items: center; gap: 10px; font-size: 14.5px; color: var(--crema-2); margin-bottom: 10px; }
+.duracion-libre input { width: 90px; }
+
+.estilos { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); }
+.estilo {
+  text-align: left; padding: 14px 16px; border-radius: 6px; border: 1px solid var(--linea);
+  background: var(--noche-2); cursor: pointer; transition: border-color var(--t), background var(--t);
+}
+.estilo:hover { border-color: var(--linea-viva); }
+.estilo[aria-pressed=true] { border-color: var(--jade); background: var(--superficie); }
+.estilo b { display: block; font-family: var(--serif); font-weight: 400; font-size: 24px; line-height: 1.1; margin-bottom: 4px; }
+.estilo[aria-pressed=true] b { color: var(--jade); }
+.estilo span { font-size: 13.5px; color: var(--crema-2); }
+.ayuda-tipo {
+  margin: 14px 0 0; padding: 12px 14px; border-left: 3px solid var(--jade);
+  background: var(--noche-2); font-size: 14.5px; color: var(--crema-2); border-radius: 0 4px 4px 0;
+}
+.ayuda-tipo b { color: var(--crema); font-weight: 500; }
+
+.marco {
+  aspect-ratio: 9 / 16; width: 100%; max-width: 400px; margin: 0 auto;
+  border-radius: 10px; overflow: hidden; border: 1px solid var(--linea); background: var(--noche-2);
+}
+.marco canvas { width: 100%; height: 100%; display: block; }
+.controles { display: flex; align-items: center; gap: 12px; max-width: 400px; margin: 12px auto 16px; }
+.controles input[type=range] { flex: 1; accent-color: var(--jade); min-width: 0; }
+.reloj { font-size: 13px; color: var(--crema-2); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.vista .boton.ancho { max-width: 400px; display: flex; margin: 0 auto; }
+.vista .nota { max-width: 400px; margin: 12px auto 0; text-align: center; }
+
+/* En el móvil, los dos botones importantes siempre a mano, abajo */
+.barra-movil { display: none; }
+@media (max-width: 899px) {
+  body { padding-bottom: calc(84px + env(safe-area-inset-bottom)); }
+  .barra-movil {
+    display: flex; gap: 10px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 40;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom));
+    background: rgba(14, 9, 18, .94); border-top: 1px solid var(--linea);
+    -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  }
+  .barra-movil .boton { flex: 1; padding-inline: 12px; }
+}
+
+.modal {
+  position: fixed; inset: 0; z-index: 50; background: rgba(14, 9, 18, .92);
+  display: grid; place-items: center; padding: 16px; overflow-y: auto;
+}
+.modal[hidden] { display: none; }
+.caja {
+  width: 100%; max-width: 440px; background: var(--noche-2); border: 1px solid var(--linea);
+  border-radius: 10px; padding: 24px 20px; display: grid; gap: 16px;
+}
+.caja[hidden], .boton[hidden] { display: none; }
+.caja h2 { font-family: var(--serif); font-weight: 400; font-size: 32px; line-height: 1.05; margin: 0; }
+.caja h2 em { color: var(--jade); }
+.barra-progreso { height: 6px; background: var(--linea); border-radius: 100px; overflow: hidden; }
+.barra-progreso div { height: 100%; width: 0; background: var(--jade); transition: width 120ms linear; }
+.caja video { width: 100%; max-height: 52vh; border-radius: 6px; background: #000; display: block; }
+.acciones { display: grid; gap: 10px; }
+</style>
+</head>
+<body>
+
+<header class="cabecera">
+  <div class="logo">David <span class="amp">&amp;</span> Jorge</div>
+  <p class="etiqueta viva">Creador de reels</p>
+</header>
+
+<main class="rejilla">
+  <section>
+    <h1>Tu reel, <em>en un momento</em></h1>
+    <p class="entradilla">Elige fotos y vídeos, di cuánto tiene que durar y pon los textos. El vídeo sale hecho, en vertical y listo para ponerle música.</p>
+
+    <div class="paso">
+      <p class="etiqueta"><b>1</b> · Qué tipo de reel</p>
+      <div class="estilos tipos" id="tipos"></div>
+      <p class="ayuda-tipo" id="tipoAyuda"></p>
+    </div>
+
+    <div class="paso">
+      <p class="etiqueta"><b>2</b> · Fotos y vídeos</p>
+      <label class="soltar" id="soltar">
+        <input type="file" id="archivos" class="oculto" accept="image/*,video/*" multiple>
+        <span class="boton">Elegir fotos y vídeos</span>
+        <small>Salen en el orden en que los elijas. En el ordenador también puedes arrastrarlos aquí.</small>
+      </label>
+      <p class="estado-carga" id="estadoCarga" role="status"></p>
+      <ol class="lista" id="lista"></ol>
+    </div>
+
+    <div class="paso">
+      <p class="etiqueta"><b>3</b> · Cuánto dura el reel</p>
+      <div class="pastillas" id="duraciones"></div>
+      <label class="duracion-libre">Otra duración: <input type="number" id="durLibre" min="5" max="180" step="1" inputmode="numeric"> segundos</label>
+      <p class="nota" id="reparto"></p>
+    </div>
+
+    <div class="paso">
+      <p class="etiqueta"><b>4</b> · Textos</p>
+      <label class="campo">Frase pequeña de arriba
+        <input type="text" id="subtitulo" maxlength="60">
+      </label>
+      <label class="campo">Título del principio
+        <textarea id="titulo" rows="2" maxlength="120"></textarea>
+      </label>
+      <p class="nota">Lo que pongas entre asteriscos sale en verde y en cursiva, como en la web: <em>*desde la salud*</em>. Cada foto puede llevar su propio texto en la lista de arriba.</p>
+      <label class="check"><input type="checkbox" id="logoActivo"> Logo arriba a la izquierda</label>
+      <label class="check"><input type="checkbox" id="instaActivo"> Instagram arriba a la derecha</label>
+      <label class="campo" id="campoInsta">Cuenta de Instagram
+        <input type="text" id="insta" maxlength="30" autocapitalize="off" autocorrect="off" spellcheck="false">
+      </label>
+      <label class="check"><input type="checkbox" id="cierreActivo"> Cierre con el logo al final</label>
+      <label class="campo" id="campoCierre">Texto del cierre
+        <textarea id="cierre" rows="2" maxlength="120"></textarea>
+      </label>
+    </div>
+
+    <div class="paso">
+      <p class="etiqueta"><b>5</b> · Estilo</p>
+      <div class="estilos" id="estilos">
+        <button type="button" class="estilo" data-estilo="suave"><b>Suave</b><span>Zoom lento sobre cada foto y fundidos. Elegante.</span></button>
+        <button type="button" class="estilo" data-estilo="dinamico"><b>Dinámico</b><span>Cambios rápidos que suben con una línea verde.</span></button>
+        <button type="button" class="estilo" data-estilo="revista"><b>Revista</b><span>Foto enmarcada con el texto debajo, como una portada.</span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="vista" aria-label="Vista previa">
+    <div class="marco"><canvas id="lienzo" width="1080" height="1920"></canvas></div>
+    <div class="controles">
+      <button type="button" class="mini-boton" id="play" aria-label="Pausa">❚❚</button>
+      <input type="range" id="barra" min="0" max="30" step="0.01" value="0" aria-label="Momento del vídeo">
+      <span class="reloj" id="reloj">0:00 / 0:30</span>
+    </div>
+    <button type="button" class="boton ancho" id="crear" disabled>Crear vídeo</button>
+    <p class="nota">El vídeo se hace en este dispositivo: tus fotos no se suben a ningún sitio.</p>
+  </section>
+</main>
+
+<nav class="barra-movil" aria-label="Acciones">
+  <button type="button" class="boton fantasma" id="irVista">Ver cómo queda</button>
+  <button type="button" class="boton" id="crearMovil" disabled>Crear vídeo</button>
+</nav>
+
+<div class="modal" id="modal" hidden>
+  <div class="caja" id="cajaProgreso">
+    <p class="etiqueta viva">Creando el vídeo</p>
+    <h2 id="progresoTitulo">Un momento…</h2>
+    <div class="barra-progreso"><div id="progresoBarra"></div></div>
+    <p class="nota" id="progresoNota">No cierres esta pantalla ni cambies de aplicación hasta que termine.</p>
+    <button type="button" class="boton fantasma" id="cancelar">Cancelar</button>
+  </div>
+  <div class="caja" id="cajaResultado" hidden>
+    <p class="etiqueta viva">Listo</p>
+    <h2>Tu reel <em>ya está hecho</em></h2>
+    <video id="resultado" controls playsinline muted></video>
+    <p class="nota" id="resultadoNota"></p>
+    <div class="acciones">
+      <button type="button" class="boton" id="compartir" hidden>Guardar en el móvil</button>
+      <a class="boton" id="descargar" download>Descargar vídeo</a>
+      <button type="button" class="boton fantasma" id="cerrar">Volver</button>
+    </div>
+  </div>
+</div>
+
+<div id="almacen" style="position:fixed;left:0;top:0;width:2px;height:2px;overflow:hidden;opacity:0;pointer-events:none" aria-hidden="true"></div>
+
+<script>/*MUXER*/</script>
+<script>
+'use strict';
+
+/* ======================================================================
+   Datos
+   ====================================================================== */
+const W = 1080, H = 1920, FPS = 30;
+const C = {
+  noche: '#0E0912', noche2: '#150E1B', superficie: '#1D1425', linea: '#2F2239', lineaViva: '#43304F',
+  crema: '#F4EFF6', crema2: '#B9AAC2', crema3: '#8B7C95', jade: '#63D6BE', miel: '#E4B265'
+};
+const DURACIONES = [15, 30, 45, 60, 90];
+// Tipos de reel: los formatos que más funcionan en peluquería
+const TIPOS = {
+  libre: {
+    nombre: 'Libre', desc: 'Fotos y vídeos con el texto que quieras.',
+    ayuda: 'Elige las fotos y vídeos que quieras. En la primera sale el título y en las demás, el texto que escribas en cada una.',
+    titulo: 'Rizo a rizo, *desde la salud*', subtitulo: 'Especialistas en cabello rizado'
+  },
+  antes: {
+    nombre: 'Antes y después', desc: 'Una cortina descubre el resultado.',
+    ayuda: 'Elige las fotos <b>por parejas</b>: antes, después, antes, después… Quedan mejor hechas desde el mismo ángulo y con la misma luz. Funciona mejor corto: <b>15 s</b>.',
+    titulo: 'De encrespado a *definido*', subtitulo: 'Antes y después'
+  },
+  pasos: {
+    nombre: 'Paso a paso', desc: 'Cada foto, un paso con su número.',
+    ayuda: 'La <b>primera foto es la portada</b> con el título. Después, una foto por paso y en orden. Escribe en cada una qué se hace.',
+    titulo: 'Así cortamos *rizo a rizo*', subtitulo: 'Paso a paso'
+  },
+  consejos: {
+    nombre: 'Consejos', desc: 'Una pregunta y los consejos numerados.',
+    ayuda: 'La <b>primera foto es la portada</b>: pon de título una pregunta o un gancho, como «3 errores que…». En cada foto siguiente escribe un consejo.',
+    titulo: '3 errores que *encrespan* tus rizos', subtitulo: 'Consejos de salón'
+  },
+  mito: {
+    nombre: 'Mito o realidad', desc: 'El mito se tacha y luego llega la verdad.',
+    ayuda: 'La <b>primera foto es la portada</b>. Después van <b>por parejas</b>: en una escribe el mito (se tachará solo) y en la siguiente, la realidad.',
+    titulo: '¿Mito o *realidad*?', subtitulo: 'Pelo rizado'
+  },
+  opinion: {
+    nombre: 'Opiniones', desc: 'Lo que dicen las clientas, con estrellas.',
+    ayuda: 'La <b>primera foto es la portada</b>. En cada foto siguiente, la opinión de una clienta y su nombre detrás de un guion. Por ejemplo: <b>Salí encantada con mis rizos — Laura</b>',
+    titulo: 'Lo que dicen *nuestras clientas*', subtitulo: 'Opiniones reales'
+  }
+};
+const TRANSICION = { suave: 0.8, dinamico: 0.42, revista: 0.7 };
+const CAJA_REVISTA = { x: 80, y: 300, w: 920, h: 1180 };
+const OLAS = new Path2D('M8 6c-3 4 5 7 0 10s3 7 0 10');
+
+const POR_DEFECTO = {
+  duracion: 30,
+  subtitulo: 'Especialistas en cabello rizado',
+  titulo: 'Rizo a rizo, *desde la salud*',
+  cierre: 'Pide tu cita\nMadrid · Alcobendas',
+  logoActivo: true,
+  instaActivo: true,
+  insta: 'davidyjorge_peluqueros',
+  cierreActivo: true,
+  estilo: 'suave',
+  tipo: 'libre'
+};
+const ajustes = Object.assign({}, POR_DEFECTO, leerGuardado());
+const clips = [];   // { id, tipo, nombre, fuente, ancho, alto, mini, texto, entera, desde, dur }
+let contadorId = 0;
+
+function leerGuardado() {
+  try { return JSON.parse(localStorage.getItem('reels-dyj') || '{}'); } catch { return {}; }
+}
+function guardar() {
+  try { localStorage.setItem('reels-dyj', JSON.stringify(ajustes)); } catch {}
+}
+
+/* ======================================================================
+   Utilidades
+   ====================================================================== */
+const $ = id => document.getElementById(id);
+const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+const salida = x => 1 - Math.pow(1 - x, 3);
+const suave = x => x < .5 ? 4 * x * x * x : 1 - Math.pow(-2 * x + 2, 3) / 2;
+const esperar = ms => new Promise(r => setTimeout(r, ms));
+const escapar = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const reloj = s => { s = Math.max(0, Math.round(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+const coma = n => String(Math.round(n * 10) / 10).replace('.', ',');
+
+function lienzoNuevo(w, h) { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; }
+
+/* ======================================================================
+   Cargar fotos y vídeos
+   ====================================================================== */
+async function cargarFoto(archivo) {
+  const url = URL.createObjectURL(archivo);
+  try {
+    const img = new Image();
+    await new Promise((ok, ko) => { img.onload = ok; img.onerror = ko; img.src = url; });
+    // Las fotos del móvil pesan 12 megapíxeles o más: se reducen para que el
+    // vídeo se haga rápido y el móvil no se quede sin memoria.
+    const esc = Math.min(1, 2400 / Math.max(img.naturalWidth, img.naturalHeight));
+    const w = Math.round(img.naturalWidth * esc), h = Math.round(img.naturalHeight * esc);
+    const c = lienzoNuevo(w, h);
+    c.getContext('2d').drawImage(img, 0, 0, w, h);
+    return { tipo: 'foto', fuente: c, ancho: w, alto: h, mini: miniatura(c, w, h) };
+  } finally {
+    URL.revokeObjectURL(url);
+  }
+}
+
+function eventoUna(el, nombres, ms) {
+  return new Promise((ok, ko) => {
+    const fin = e => { limpiar(); e && e.type === 'error' ? ko(new Error('error')) : ok(); };
+    const limpiar = () => { clearTimeout(to); nombres.concat('error').forEach(n => el.removeEventListener(n, fin)); };
+    const to = setTimeout(() => { limpiar(); ok(); }, ms);
+    nombres.concat('error').forEach(n => el.addEventListener(n, fin));
+  });
+}
+
+async function cargarVideo(archivo) {
+  const v = document.createElement('video');
+  v.muted = true; v.defaultMuted = true; v.playsInline = true;
+  v.setAttribute('playsinline', ''); v.setAttribute('muted', '');
+  v.preload = 'auto';
+  v.src = URL.createObjectURL(archivo);
+  $('almacen').appendChild(v);
+  if (v.readyState < 1) await eventoUna(v, ['loadedmetadata'], 15000);
+  if (!v.videoWidth || !isFinite(v.duration)) throw new Error('video');
+  // iPhone no prepara los fotogramas hasta que el vídeo se ha reproducido una vez.
+  try { await v.play(); v.pause(); } catch {}
+  await buscar(v, Math.min(0.5, v.duration / 2));
+  const c = lienzoNuevo(v.videoWidth, v.videoHeight);
+  c.getContext('2d').drawImage(v, 0, 0);
+  return { tipo: 'video', fuente: v, ancho: v.videoWidth, alto: v.videoHeight, dur: v.duration, mini: miniatura(v, v.videoWidth, v.videoHeight) };
+}
+
+function miniatura(fuente, w, h) {
+  const c = lienzoNuevo(128, 228), x = c.getContext('2d');
+  const s = Math.max(128 / w, 228 / h);
+  x.drawImage(fuente, (128 - w * s) / 2, (228 - h * s) / 2, w * s, h * s);
+  return c.toDataURL('image/jpeg', .75);
+}
+
+function buscar(v, t) {
+  t = clamp(t, 0, Math.max(0, v.duration - 0.04));
+  if (Math.abs(v.currentTime - t) < 0.002 && v.readyState >= 2 && !v.seeking) return Promise.resolve();
+  const p = eventoUna(v, ['seeked'], 2000);
+  v.currentTime = t;
+  return p;
+}
+
+async function anadirArchivos(lista) {
+  const archivos = [...lista].filter(f => /^(image|video)\//.test(f.type) || /\.(heic|heif|mov|mp4|m4v|jpe?g|png|webp)$/i.test(f.name));
+  if (!archivos.length) return;
+  const estado = $('estadoCarga');
+  estado.classList.remove('aviso');
+  const fallos = [];
+  for (let i = 0; i < archivos.length; i++) {
+    const f = archivos[i];
+    estado.textContent = `Preparando ${i + 1} de ${archivos.length}…`;
+    try {
+      const esVideo = f.type.startsWith('video/') || /\.(mov|mp4|m4v)$/i.test(f.name);
+      const datos = esVideo ? await cargarVideo(f) : await cargarFoto(f);
+      clips.push(Object.assign({
+        id: ++contadorId, nombre: f.name, texto: '', desde: 0,
+        entera: datos.ancho > datos.alto * 1.05   // las apaisadas, enteras con fondo difuminado
+      }, datos));
+    } catch {
+      fallos.push(f.name);
+    }
+    pintarLista();
+  }
+  if (fallos.length) {
+    estado.classList.add('aviso');
+    estado.textContent = `No se ${fallos.length > 1 ? 'han' : 'ha'} podido abrir: ${fallos.join(', ')}. ` +
+      (fallos.some(n => /\.hei[cf]$/i.test(n)) ? 'Las fotos HEIC del iPhone no se abren en el ordenador: pásalas a JPG o elígelas desde el propio iPhone.' : 'Puede que el formato no sea compatible con este navegador.');
+  } else {
+    estado.textContent = '';
+  }
+  reiniciarVista();
+}
+
+/* ======================================================================
+   Lista de clips
+   ====================================================================== */
+function pintarLista() {
+  const ol = $('lista');
+  ol.innerHTML = clips.map((c, i) => `
+    <li class="clip" data-id="${c.id}">
+      <img class="mini" src="${c.mini}" alt="">
+      <div class="clip-cuerpo">
+        <div class="clip-cabeza">
+          <span class="etiqueta">${nombreRol(c, i)}</span>
+          <span class="clip-botones">
+            <button type="button" class="mini-boton" data-accion="subir" aria-label="Subir" ${i === 0 ? 'disabled' : ''}>↑</button>
+            <button type="button" class="mini-boton" data-accion="bajar" aria-label="Bajar" ${i === clips.length - 1 ? 'disabled' : ''}>↓</button>
+            <button type="button" class="mini-boton" data-accion="quitar" aria-label="Quitar">✕</button>
+          </span>
+        </div>
+        <input type="text" data-campo="texto" value="${escapar(c.texto)}" placeholder="${escapar(ayudaRol(c, i))}" maxlength="120">
+        <div class="clip-extra">
+          ${c.tipo === 'video' ? `<label>Empieza en el segundo <input type="number" data-campo="desde" min="0" max="${Math.floor(c.dur)}" step="0.5" value="${c.desde}" inputmode="decimal"></label><span>dura ${coma(c.dur)} s</span>` : ''}
+          <label class="check" style="margin:0"><input type="checkbox" data-campo="entera" ${c.entera ? 'checked' : ''}> Enseñarla entera</label>
+        </div>
+      </div>
+    </li>`).join('');
+  $('crear').disabled = $('crearMovil').disabled = !clips.length;
+  pintarReparto();
+}
+
+$('lista').addEventListener('click', e => {
+  const b = e.target.closest('button[data-accion]');
+  if (!b) return;
+  const i = clips.findIndex(c => c.id === +b.closest('.clip').dataset.id);
+  const acc = b.dataset.accion;
+  if (acc === 'subir' && i > 0) [clips[i - 1], clips[i]] = [clips[i], clips[i - 1]];
+  if (acc === 'bajar' && i < clips.length - 1) [clips[i + 1], clips[i]] = [clips[i], clips[i + 1]];
+  if (acc === 'quitar') {
+    const [c] = clips.splice(i, 1);
+    if (c.tipo === 'video') { URL.revokeObjectURL(c.fuente.src); c.fuente.remove(); }
+  }
+  pintarLista();
+  reiniciarVista();
+});
+$('lista').addEventListener('input', e => {
+  const el = e.target, campo = el.dataset.campo;
+  if (!campo) return;
+  const c = clips.find(c => c.id === +el.closest('.clip').dataset.id);
+  if (campo === 'texto') c.texto = el.value;
+  if (campo === 'desde') c.desde = clamp(parseFloat(el.value.replace(',', '.')) || 0, 0, Math.max(0, c.dur - 0.5));
+  if (campo === 'entera') c.entera = el.checked;
+});
+
+/* ======================================================================
+   Controles
+   ====================================================================== */
+function pintarDuraciones() {
+  $('duraciones').innerHTML = DURACIONES.map(d =>
+    `<button type="button" class="pastilla" data-d="${d}" aria-pressed="${ajustes.duracion === d}">${d} s</button>`).join('');
+  $('durLibre').value = DURACIONES.includes(ajustes.duracion) ? '' : ajustes.duracion;
+}
+$('duraciones').addEventListener('click', e => {
+  const b = e.target.closest('[data-d]');
+  if (!b) return;
+  ajustes.duracion = +b.dataset.d;
+  cambiado();
+});
+$('durLibre').addEventListener('change', e => {
+  const d = Math.round(parseFloat(e.target.value));
+  if (!d) return;
+  ajustes.duracion = clamp(d, 5, 180);
+  cambiado();
+});
+
+function nombreRol(c, i) {
+  const R = rol(i);
+  return {
+    portada: 'Portada', antes: 'Antes ' + R.n, despues: 'Después ' + R.n, paso: 'Paso ' + R.n,
+    consejo: 'Consejo ' + R.n, mito: 'Mito ' + R.n, realidad: 'Realidad ' + R.n, opinion: 'Opinión ' + R.n
+  }[R.r] || (c.tipo === 'video' ? 'Vídeo ' : 'Foto ') + (i + 1);
+}
+function ayudaRol(c, i) {
+  const R = rol(i);
+  if (i === 0 && (ajustes.titulo.trim() || ajustes.subtitulo.trim())) return 'Aquí sale el título (abajo, en Textos)';
+  return {
+    antes: 'Qué había antes (opcional)', despues: 'Qué hicimos (opcional)', paso: 'Qué se hace en este paso',
+    consejo: 'El consejo', mito: 'El mito: lo que se dice', realidad: 'La realidad', opinion: 'Opinión — Nombre'
+  }[R.r] || 'Texto en esta ' + (c.tipo === 'video' ? 'toma' : 'foto') + ' (opcional)';
+}
+
+function pintarReparto() {
+  const p = $('reparto');
+  if (!clips.length) { p.textContent = 'Cuando elijas las fotos te digo cuánto sale cada una.'; p.classList.remove('aviso-texto'); return; }
+  const L = linea();
+  const n = clips.length;
+  let txt = `${n} ${n > 1 ? 'fotos y vídeos' : 'foto o vídeo'} en ${ajustes.duracion} s: cada una sale ${coma(L.slot)} s`;
+  if (L.O) txt += `, y ${coma(L.O)} s de cierre`;
+  txt += '.';
+  const rapido = L.slot < 1;
+  if (rapido) txt += ' Va muy rápido: sube la duración o quita alguna.';
+  let falta = '';
+  if (ajustes.tipo === 'antes' && n % 2) falta = ' Falta la foto de después de la última pareja.';
+  if (ajustes.tipo === 'mito' && n > 1 && (n - 1) % 2) falta = ' Falta la realidad del último mito.';
+  if (!['libre', 'antes'].includes(ajustes.tipo) && n < 2) falta = ' Añade al menos una foto más después de la portada.';
+  p.textContent = txt + falta;
+  p.classList.toggle('aviso-texto', rapido || !!falta);
+}
+
+['subtitulo', 'titulo', 'cierre', 'insta'].forEach(k => {
+  $(k).value = ajustes[k];
+  $(k).addEventListener('input', () => { ajustes[k] = $(k).value; guardar(); });
+});
+['logoActivo', 'instaActivo', 'cierreActivo'].forEach(k => {
+  $(k).checked = ajustes[k];
+  $(k).addEventListener('change', () => { ajustes[k] = $(k).checked; cambiado(); });
+});
+$('estilos').addEventListener('click', e => {
+  const b = e.target.closest('[data-estilo]');
+  if (!b) return;
+  ajustes.estilo = b.dataset.estilo;
+  cambiado();
+});
+function pintarTipos() {
+  $('tipos').innerHTML = Object.entries(TIPOS).map(([k, t]) =>
+    `<button type="button" class="estilo" data-tipo="${k}" aria-pressed="${ajustes.tipo === k}"><b>${t.nombre}</b><span>${t.desc}</span></button>`).join('');
+  $('tipoAyuda').innerHTML = (TIPOS[ajustes.tipo] || TIPOS.libre).ayuda;
+}
+$('tipos').addEventListener('click', e => {
+  const b = e.target.closest('[data-tipo]');
+  if (!b || b.dataset.tipo === ajustes.tipo) return;
+  const antes = TIPOS[ajustes.tipo] || TIPOS.libre, nuevo = TIPOS[b.dataset.tipo];
+  // Si el título es el de ejemplo del tipo anterior (o está vacío), se cambia por el del nuevo
+  ['titulo', 'subtitulo'].forEach(k => {
+    if (!ajustes[k].trim() || ajustes[k] === antes[k]) { ajustes[k] = nuevo[k]; $(k).value = nuevo[k]; }
+  });
+  ajustes.tipo = b.dataset.tipo;
+  if (ajustes.tipo === 'antes' && ajustes.duracion > 20) ajustes.duracion = 15;
+  cambiado();
+});
+
+function pintarEstilos() {
+  document.querySelectorAll('[data-estilo]').forEach(b => b.setAttribute('aria-pressed', b.dataset.estilo === ajustes.estilo));
+  $('campoCierre').style.display = ajustes.cierreActivo ? '' : 'none';
+  $('campoInsta').style.display = ajustes.instaActivo ? '' : 'none';
+}
+function cambiado() {
+  guardar();
+  pintarTipos();
+  pintarLista();
+  pintarDuraciones();
+  pintarEstilos();
+  pintarReparto();
+  reiniciarVista();
+}
+
+const soltar = $('soltar');
+$('archivos').addEventListener('change', e => { anadirArchivos(e.target.files); e.target.value = ''; });
+['dragenter', 'dragover'].forEach(n => soltar.addEventListener(n, e => { e.preventDefault(); soltar.classList.add('encima'); }));
+['dragleave', 'drop'].forEach(n => soltar.addEventListener(n, e => { e.preventDefault(); soltar.classList.remove('encima'); }));
+soltar.addEventListener('drop', e => anadirArchivos(e.dataTransfer.files));
+
+/* ======================================================================
+   Línea de tiempo
+   ----------------------------------------------------------------------
+   La duración total se reparte a partes iguales entre los clips; el cierre
+   va aparte. Cada clip entra a mitad de la transición y sale a mitad de la
+   siguiente, así que el reel dura exactamente lo pedido.
+   ====================================================================== */
+function linea() {
+  const T = ajustes.duracion;
+  const n = Math.max(1, clips.length);
+  const O = ajustes.cierreActivo ? clamp(T * 0.12, 2, 3.2) : 0;
+  const slot = (T - O) / n;
+  // En antes y después la cortina necesita algo más de tiempo para lucirse
+  const base = ajustes.tipo === 'antes' ? Math.max(0.9, TRANSICION[ajustes.estilo]) : TRANSICION[ajustes.estilo];
+  const d = Math.min(base, slot * 0.45);
+  return { T, O, n, slot, d };
+}
+
+function escena(t, L) {
+  const ultimo = L.O ? L.n : L.n - 1;
+  const k = Math.round(t / L.slot);
+  if (k >= 1 && k <= ultimo && Math.abs(t - k * L.slot) < L.d / 2) {
+    return { de: k - 1, a: k, p: (t - (k * L.slot - L.d / 2)) / L.d };
+  }
+  return { de: Math.min(Math.floor(t / L.slot), ultimo) };
+}
+
+const inicioClip = (i, L) => i === 0 ? 0 : i * L.slot - L.d / 2;
+function tiempoVideo(c, i, t, L) { return clamp(c.desde + (t - inicioClip(i, L)), 0, c.dur - 0.05); }
+
+function clipsActivos(t, L) {
+  const e = escena(t, L);
+  return (e.a === undefined ? [e.de] : [e.de, e.a]).filter(i => i < clips.length);
+}
+
+/* ======================================================================
+   Dibujo
+   ====================================================================== */
+const lienzo = $('lienzo');
+const ctx = lienzo.getContext('2d');
+const capaA = lienzoNuevo(W, H), capaB = lienzoNuevo(W, H);
+const ctxA = capaA.getContext('2d'), ctxB = capaB.getContext('2d');
+const diminuto = lienzoNuevo(27, 48), ctxDim = diminuto.getContext('2d');
+
+const fuenteSerif = (tam, cursiva) => `${cursiva ? 'italic ' : ''}400 ${tam}px "Instrument Serif", Georgia, serif`;
+const fuenteSans = (tam, peso = 400) => `${peso} ${tam}px Archivo, system-ui, sans-serif`;
+
+function dibujar(x, t) {
+  const L = linea();
+  x.globalAlpha = 1;
+  x.fillStyle = C.noche;
+  x.fillRect(0, 0, W, H);
+  if (!clips.length) return pantallaVacia(x, t);
+
+  const revista = ajustes.estilo === 'revista';
+  if (revista) fondoRevista(x);
+
+  const e = escena(t, L);
+  pintarCapa(ctxA, e.de, t, L);
+  if (e.a === undefined) {
+    x.drawImage(capaA, 0, 0);
+  } else {
+    pintarCapa(ctxB, e.a, t, L);
+    componer(x, e.p, e.de, e.a, L);
+  }
+
+  // Logo arriba a la izquierda e Instagram a la derecha (en el cierre ya van grandes)
+  let a = 1;
+  if (L.O) a = 1 - clamp((t - (L.n * L.slot - L.d / 2)) / L.d);
+  if (a > 0) {
+    const y = revista ? 196 : 170;
+    if (ajustes.logoActivo) logo(x, revista ? 80 : 76, y, revista ? 58 : 54, 'left', a, !revista);
+    if (instaVisible()) instagram(x, W - (revista ? 80 : 70), y - 14, 30, 'right', a, !revista);
+  }
+}
+
+const cuentaInsta = () => ajustes.insta.trim().replace(/^@+/, '').replace(/^(https?:\/\/)?(www\.)?instagram\.com\//i, '').replace(/[/?#].*$/, '');
+const instaVisible = () => ajustes.instaActivo && cuentaInsta();
+
+// Icono de Instagram (trazo, como el de la web) y la cuenta al lado.
+// y es el centro vertical del grupo.
+function instagram(x, px, cy, tam, alinear, alpha, sombra) {
+  const texto = '@' + cuentaInsta();
+  x.save();
+  x.globalAlpha = alpha;
+  x.font = fuenteSans(tam, 500);
+  // Si la cuenta es muy larga, la letra se encoge para no pisar el logo
+  let t = tam;
+  while (t > 20 && x.measureText(texto).width > 420) { t -= 2; x.font = fuenteSans(t, 500); }
+  const lado = Math.round(t * 1.45), hueco = Math.round(t * 0.45);
+  const total = lado + hueco + x.measureText(texto).width;
+  const x0 = alinear === 'right' ? px - total : alinear === 'center' ? px - total / 2 : px;
+  if (sombra) { x.shadowColor = 'rgba(14,9,18,.55)'; x.shadowBlur = 20; }
+  x.strokeStyle = C.jade; x.fillStyle = C.jade;
+  x.lineWidth = Math.max(2, lado * 0.085);
+  const r = lado * 0.28, ix = x0, iy = cy - lado / 2;
+  x.beginPath();
+  x.moveTo(ix + r, iy); x.arcTo(ix + lado, iy, ix + lado, iy + lado, r); x.arcTo(ix + lado, iy + lado, ix, iy + lado, r);
+  x.arcTo(ix, iy + lado, ix, iy, r); x.arcTo(ix, iy, ix + lado, iy, r); x.closePath(); x.stroke();
+  x.beginPath(); x.arc(ix + lado / 2, cy, lado * 0.23, 0, Math.PI * 2); x.stroke();
+  x.beginPath(); x.arc(ix + lado * 0.76, iy + lado * 0.24, lado * 0.06, 0, Math.PI * 2); x.fill();
+  x.fillStyle = C.crema;
+  x.textBaseline = 'middle';
+  x.fillText(texto, x0 + lado + hueco, cy + t * 0.04);
+  x.restore();
+}
+
+function componer(x, p, de, a, L) {
+  const e = suave(clamp(p));
+  const estilo = ajustes.estilo;
+  const haciaCierre = a >= L.n;
+  if (ajustes.tipo === 'antes' && de % 2 === 0 && a === de + 1 && !haciaCierre) {
+    // Cortina: el después va tapando al antes de izquierda a derecha, con una línea jade en el borde
+    const caja = estilo === 'revista' ? CAJA_REVISTA : { x: 0, y: 0, w: W, h: H };
+    const bx = caja.x + caja.w * e;
+    x.drawImage(capaA, 0, 0);
+    x.save();
+    x.beginPath();
+    x.rect(0, 0, bx, H);
+    x.clip();
+    x.drawImage(capaB, 0, 0);
+    x.restore();
+    if (e > 0 && e < 1) {
+      x.fillStyle = C.jade;
+      x.fillRect(bx - 4, caja.y, 8, caja.h);
+    }
+  } else if (estilo === 'dinamico') {
+    // La nueva sube desde abajo y empuja a la anterior, con una línea jade en el borde.
+    x.save();
+    x.translate(0, -H * 0.22 * e);
+    x.drawImage(capaA, 0, 0);
+    x.fillStyle = `rgba(14,9,18,${0.65 * e})`;
+    x.fillRect(0, 0, W, H);
+    x.restore();
+    const y = H * (1 - e);
+    x.drawImage(capaB, 0, y);
+    x.fillStyle = C.jade;
+    x.fillRect(0, y - 8, W, 8);
+  } else if (estilo === 'revista' && !haciaCierre) {
+    // Se apaga una y se enciende la otra, con el marco quieto.
+    if (e < .5) { x.globalAlpha = 1 - e * 2; x.drawImage(capaA, 0, 0); }
+    else { x.globalAlpha = e * 2 - 1; x.drawImage(capaB, 0, 0); }
+    x.globalAlpha = 1;
+  } else {
+    x.drawImage(capaA, 0, 0);
+    x.globalAlpha = e;
+    x.drawImage(capaB, 0, 0);
+    x.globalAlpha = 1;
+  }
+}
+
+function pintarCapa(x, i, t, L) {
+  x.clearRect(0, 0, W, H);
+  x.globalAlpha = 1;
+  if (i >= clips.length) return pintarCierre(x, t - (L.n * L.slot - L.d / 2), L);
+
+  const c = clips[i];
+  const ini = inicioClip(i, L);
+  const fin = (i + 1) * L.slot + L.d / 2;
+  const u = clamp((t - ini) / (fin - ini));
+  const tl = t - ini;
+  const revista = ajustes.estilo === 'revista';
+  const caja = revista ? CAJA_REVISTA : { x: 0, y: 0, w: W, h: H };
+
+  pintarMedio(x, c, caja, u, i, tl);
+
+  // Textos: entran cuando la transición ya ha pasado y se van antes de la siguiente
+  const esUltimo = i === clips.length - 1 && !L.O;
+  const tTexto = t - (i === 0 ? 0.3 : i * L.slot + L.d * 0.3);
+  const tFin = esUltimo ? 99 : (i + 1) * L.slot - L.d * 0.3 - t;
+  const esTitulo = i === 0 && (ajustes.titulo.trim() || ajustes.subtitulo.trim());
+  const R = rol(i);
+  const o = { i, tl: tTexto, tFin, texto: c.texto, etq: '' };
+
+  if (R.r === 'antes' || R.r === 'despues') {
+    pastilla(x, R.r === 'antes' ? 'Antes' : 'Después', R.r === 'despues', revista, clamp(tTexto / 0.4) * clamp(tFin / 0.3 + (R.r === 'antes' ? 1 : 0)));
+  }
+  if (esTitulo) {
+    Object.assign(o, { texto: ajustes.titulo, etq: ajustes.subtitulo, titulo: true });
+  } else if (R.r === 'paso') {
+    Object.assign(o, { etq: `Paso ${R.n} de ${R.de}`, numero: R.n });
+  } else if (R.r === 'consejo') {
+    Object.assign(o, { etq: `Consejo ${R.n}`, numero: R.n });
+  } else if (R.r === 'mito') {
+    Object.assign(o, { etq: 'Mito', etqColor: C.miel, tachar: true });
+  } else if (R.r === 'realidad') {
+    Object.assign(o, { etq: 'Realidad' });
+  } else if (R.r === 'opinion') {
+    return textoOpinion(x, o, revista);
+  }
+  if (revista) textoRevista(x, o);
+  else textoPantalla(x, o);
+}
+
+/* ---------- Tipos de reel ----------
+   Qué papel tiene cada foto según el tipo: portada, antes, paso 3, mito... */
+function rol(i) {
+  const t = ajustes.tipo;
+  if (t === 'antes') return { r: i % 2 ? 'despues' : 'antes', n: Math.floor(i / 2) + 1 };
+  if (t === 'libre' || !TIPOS[t]) return { r: 'libre' };
+  if (i === 0) return { r: 'portada' };
+  if (t === 'mito') return { r: (i - 1) % 2 ? 'realidad' : 'mito', n: Math.floor((i - 1) / 2) + 1 };
+  return { r: { pasos: 'paso', consejos: 'consejo', opinion: 'opinion' }[t], n: i, de: clips.length - 1 };
+}
+
+function anchoVersalitas(x, texto, tam) {
+  x.font = fuenteSans(tam, 500);
+  return [...texto.toUpperCase()].reduce((s, l) => s + x.measureText(l).width + tam * 0.22, 0) - tam * 0.22;
+}
+
+// Etiqueta "ANTES" / "DESPUÉS" en una píldora, como los botones de la web
+function pastilla(x, texto, activa, revista, alpha) {
+  if (alpha <= 0) return;
+  const tam = 30, alto = 66;
+  const w = anchoVersalitas(x, texto, tam) + 64;
+  const px = revista ? CAJA_REVISTA.x + 28 : 76;
+  const py = revista ? CAJA_REVISTA.y + 28 : 250;
+  x.save();
+  x.globalAlpha = alpha;
+  x.beginPath();
+  const r = alto / 2;
+  x.moveTo(px + r, py); x.arcTo(px + w, py, px + w, py + alto, r); x.arcTo(px + w, py + alto, px, py + alto, r);
+  x.arcTo(px, py + alto, px, py, r); x.arcTo(px, py, px + w, py, r); x.closePath();
+  x.fillStyle = activa ? C.jade : 'rgba(14,9,18,.72)';
+  x.fill();
+  if (!activa) { x.strokeStyle = C.crema3; x.lineWidth = 2; x.stroke(); }
+  x.restore();
+  versalitas(x, texto, px + 32, py + alto / 2 + tam * 0.36, tam, activa ? '#08211D' : C.crema, 'left', alpha);
+}
+
+function estrellas(x, cx, cy, tam, tl, alpha) {
+  const hueco = tam * 1.35;
+  x.save();
+  x.fillStyle = C.jade;
+  for (let k = 0; k < 5; k++) {
+    const e = salida(clamp((tl - k * 0.08) / 0.45));
+    if (e <= 0) continue;
+    x.globalAlpha = e * alpha;
+    const sx = cx + (k - 2) * hueco, R = tam / 2 * (0.6 + 0.4 * e);
+    x.beginPath();
+    for (let p = 0; p < 10; p++) {
+      const ang = -Math.PI / 2 + p * Math.PI / 5, rr = p % 2 ? R * 0.45 : R;
+      x.lineTo(sx + Math.cos(ang) * rr, cy + Math.sin(ang) * rr);
+    }
+    x.closePath();
+    x.fill();
+  }
+  x.restore();
+}
+
+// "Salí encantada con mis rizos — Laura" → la cita y el nombre
+function partirOpinion(texto) {
+  const m = String(texto).match(/^([\s\S]*?)\s+[—–-]+\s*([^—–-]+)$/);
+  return m ? { cita: m[1].trim(), nombre: m[2].trim() } : { cita: String(texto).trim(), nombre: '' };
+}
+
+function textoOpinion(x, o, revista) {
+  const { cita, nombre } = partirOpinion(o.texto);
+  if (!cita) return;
+  const texto = '“' + cita + '”';
+  const aFin = clamp(o.tFin / 0.4);
+  if (revista) {
+    estrellas(x, CAJA_REVISTA.x + CAJA_REVISTA.w - 140, CAJA_REVISTA.y + CAJA_REVISTA.h + 74, 30, o.tl, aFin);
+    return textoRevista(x, Object.assign({}, o, { texto, etq: nombre || 'Clienta' }));
+  }
+  const a = clamp(o.tl / 0.5 + 1) * clamp(o.tFin / 0.4 + 0.5);
+  x.fillStyle = `rgba(14,9,18,${.55 * a})`;
+  x.fillRect(0, 0, W, H);
+  const { lineas, tam } = ajustarTexto(x, texto, 88, 860, 6);
+  const alto = lineas.length * tam * 1.08;
+  const yTop = H * 0.47 - alto / 2;
+  estrellas(x, W / 2, yTop - 90, 46, o.tl, aFin);
+  dibujarTexto(x, lineas, { x: W / 2, y: yTop, tam, inter: 1.08, alinear: 'center', tl: o.tl - 0.3, tFin: o.tFin, sombra: true });
+  versalitas(x, nombre, W / 2, yTop + alto + 80, 32, C.jade, 'center', clamp((o.tl - 0.9) / 0.5) * aFin);
+}
+
+function pintarMedio(x, c, caja, u, i, tl) {
+  const src = c.fuente;
+  if (c.tipo === 'video' && src.readyState < 2) return;
+  const sw = c.ancho, sh = c.alto;
+  const estilo = ajustes.estilo;
+
+  x.save();
+  x.beginPath();
+  x.rect(caja.x, caja.y, caja.w, caja.h);
+  x.clip();
+
+  // Zoom y desplazamiento lentos (efecto Ken Burns)
+  let z, dx = 0, dy = 0;
+  if (ajustes.tipo === 'antes') {
+    // Antes y después con el mismo encuadre, para que se compare bien
+    z = 1.03 + 0.04 * u;
+  } else if (estilo === 'dinamico') {
+    z = 1.03 + 0.07 * u + 0.16 * (1 - salida(clamp(tl / 0.7)));
+  } else if (estilo === 'revista') {
+    z = 1.02 + 0.07 * u;
+  } else {
+    z = i % 2 ? 1.16 - 0.12 * u : 1.04 + 0.12 * u;
+    const dir = [[1, 0], [0, 1], [-1, 0], [0, -1]][i % 4];
+    dx = dir[0] * (u - .5); dy = dir[1] * (u - .5);
+  }
+
+  const cx = caja.x + caja.w / 2, cy = caja.y + caja.h / 2;
+  if (c.entera) {
+    // Fondo: la misma imagen muy difuminada (pasándola por un lienzo diminuto)
+    const sf = Math.max(27 / sw, 48 / sh);
+    ctxDim.drawImage(src, (27 - sw * sf) / 2, (48 - sh * sf) / 2, sw * sf, sh * sf);
+    x.imageSmoothingEnabled = true;
+    x.imageSmoothingQuality = 'high';
+    x.drawImage(diminuto, caja.x - 40, caja.y - 40, caja.w + 80, caja.h + 80);
+    x.fillStyle = 'rgba(14,9,18,.5)';
+    x.fillRect(caja.x, caja.y, caja.w, caja.h);
+    const s = Math.min(caja.w / sw, caja.h / sh) * (1 + (z - 1) * 0.35);
+    x.drawImage(src, cx - sw * s / 2, cy - sh * s / 2, sw * s, sh * s);
+  } else {
+    const s = Math.max(caja.w / sw, caja.h / sh) * z;
+    const w = sw * s, h = sh * s;
+    const holguraX = (w - caja.w) / 2, holguraY = (h - caja.h) / 2;
+    const ox = clamp(dx * caja.w * 0.08, -holguraX, holguraX);
+    const oy = clamp(dy * caja.h * 0.08, -holguraY, holguraY);
+    x.drawImage(src, cx - w / 2 + ox, cy - h / 2 + oy, w, h);
+  }
+  x.restore();
+
+  if (estilo !== 'revista') {
+    // Velo arriba para que el logo se lea sobre cualquier foto
+    if (ajustes.logoActivo || instaVisible()) {
+      const g = x.createLinearGradient(0, 0, 0, 420);
+      g.addColorStop(0, 'rgba(14,9,18,.55)');
+      g.addColorStop(1, 'rgba(14,9,18,0)');
+      x.fillStyle = g;
+      x.fillRect(0, 0, W, 420);
+    }
+  }
+}
+
+/* ---------- Texto con palabras en jade y animación palabra a palabra ---------- */
+function palabras(texto) {
+  const out = [];
+  let jade = false;
+  texto.split('*').forEach((trozo, k) => {
+    if (k > 0) jade = !jade;
+    trozo.split(/\s+/).forEach(p => { if (p) out.push({ t: p, jade }); });
+  });
+  return out;
+}
+
+function maquetar(x, texto, tam, ancho, fam) {
+  const lineas = [];
+  const fuente = j => fam === 'serif' ? fuenteSerif(tam, j) : fuenteSans(tam);
+  for (const parrafo of String(texto).split('\n')) {
+    const ps = palabras(parrafo);
+    if (!ps.length) continue;
+    let actual = [], ax = 0;
+    for (const p of ps) {
+      x.font = fuente(p.jade);
+      const w = x.measureText(p.t).width;
+      const esp = x.measureText(' ').width;
+      if (actual.length && ax + w > ancho) {
+        lineas.push({ pal: actual, ancho: ax - actual.esp });
+        actual = []; ax = 0;
+      }
+      actual.push(Object.assign({ x: ax, w }, p));
+      actual.esp = esp;
+      ax += w + esp;
+    }
+    lineas.push({ pal: actual, ancho: ax - actual.esp });
+  }
+  return lineas;
+}
+
+function ajustarTexto(x, texto, tam, ancho, maxLineas, fam = 'serif') {
+  let l = maquetar(x, texto, tam, ancho, fam);
+  while (l.length > maxLineas && tam > 46) { tam = Math.round(tam * .9); l = maquetar(x, texto, tam, ancho, fam); }
+  return { lineas: l, tam };
+}
+
+function dibujarTexto(x, lineas, o) {
+  const { tam, fam = 'serif', color = C.crema, inter = 1.06, alinear = 'left', tl, tFin, sombra } = o;
+  const aFin = clamp(tFin / 0.4);
+  let j = 0;
+  x.save();
+  x.textBaseline = 'alphabetic';
+  if (sombra) { x.shadowColor = 'rgba(14,9,18,.6)'; x.shadowBlur = 28; }
+  lineas.forEach((ln, li) => {
+    const y = o.y + tam * 0.82 + li * tam * inter;
+    const x0 = alinear === 'center' ? o.x - ln.ancho / 2 : o.x;
+    ln.pal.forEach(p => {
+      const e = salida(clamp((tl - j * 0.07) / 0.7));
+      const a = e * aFin;
+      j++;
+      if (a <= 0) return;
+      x.globalAlpha = a;
+      x.font = fam === 'serif' ? fuenteSerif(tam, p.jade) : fuenteSans(tam);
+      x.fillStyle = p.jade ? C.jade : color;
+      x.fillText(p.t, x0 + p.x, y + (1 - e) * tam * 0.45);
+    });
+  });
+  x.restore();
+}
+
+function versalitas(x, texto, px, py, tam, color, alinear, alpha) {
+  if (!texto || alpha <= 0) return;
+  x.save();
+  x.font = fuenteSans(tam, 500);
+  x.fillStyle = color;
+  x.globalAlpha = alpha;
+  x.textBaseline = 'alphabetic';
+  const esp = tam * 0.22;
+  const letras = [...texto.toUpperCase()];
+  const anchos = letras.map(l => x.measureText(l).width);
+  const total = anchos.reduce((s, w) => s + w + esp, 0) - esp;
+  let cx = alinear === 'center' ? px - total / 2 : px;
+  letras.forEach((l, k) => { x.fillText(l, cx, py); cx += anchos[k] + esp; });
+  x.restore();
+}
+
+// Número grande en cursiva jade (paso 1, consejo 2...)
+function numeroGrande(x, n, px, py, alinear, tl, tFin) {
+  const e = salida(clamp(tl / 0.7));
+  const a = e * clamp(tFin / 0.4);
+  if (a <= 0) return;
+  x.save();
+  x.globalAlpha = a;
+  x.font = fuenteSerif(250, true);
+  x.fillStyle = C.jade;
+  x.textAlign = alinear;
+  x.shadowColor = 'rgba(14,9,18,.5)'; x.shadowBlur = 30;
+  x.fillText(String(n), px, py + (1 - e) * 60);
+  x.restore();
+}
+
+// Raya que tacha el mito, de izquierda a derecha, cuando ya se ha leído
+function tachar(x, lineas, o, prog) {
+  if (prog <= 0) return;
+  x.save();
+  x.globalAlpha = clamp(o.tFin / 0.4);
+  x.fillStyle = C.miel;
+  lineas.forEach((ln, li) => {
+    const y = o.y + o.tam * 0.82 + li * o.tam * 1.06 - o.tam * 0.28;
+    const p = clamp(prog * lineas.length - li);
+    if (p > 0) x.fillRect(o.x - 6, y - 3, (ln.ancho + 12) * suave(p), 7);
+  });
+  x.restore();
+}
+
+function textoPantalla(x, o) {
+  const { texto, tl, tFin } = o;
+  const etiquetaTxt = o.etq || '';
+  const esTitulo = !!o.titulo;
+  if (!texto.trim() && !etiquetaTxt.trim()) return;
+  const ancho = 800;
+  const { lineas, tam } = ajustarTexto(x, texto, esTitulo ? 116 : o.tachar ? 96 : 82, ancho, esTitulo ? 4 : 3);
+  const alto = lineas.length * tam * 1.06;
+  const yTop = H - 400 - alto;
+
+  const aVelo = clamp(tl / 0.5 + 1) * clamp(tFin / 0.4 + 0.6);
+  const g = x.createLinearGradient(0, yTop - 360, 0, H);
+  g.addColorStop(0, 'rgba(14,9,18,0)');
+  g.addColorStop(.55, `rgba(14,9,18,${.62 * aVelo})`);
+  g.addColorStop(1, `rgba(14,9,18,${.85 * aVelo})`);
+  x.fillStyle = g;
+  x.fillRect(0, yTop - 360, W, H - yTop + 360);
+
+  // Rayita jade que se estira antes del texto
+  const eLinea = salida(clamp(tl / 0.6)) * clamp(tFin / 0.4);
+  const yEtq = yTop - (etiquetaTxt.trim() ? 44 : 0);
+  if (eLinea > 0) {
+    x.fillStyle = C.jade;
+    x.globalAlpha = eLinea;
+    x.fillRect(90, yEtq - 58, 110 * eLinea, 5);
+    x.globalAlpha = 1;
+  }
+  if (o.numero) numeroGrande(x, o.numero, 80, yEtq - 90, 'left', tl, tFin);
+  versalitas(x, etiquetaTxt, 90, yEtq - 4, 30, o.etqColor || C.jade, 'left', clamp((tl - 0.1) / 0.5) * clamp(tFin / 0.4));
+  const ot = { x: 90, y: yTop, tam, tl: tl - 0.15, tFin, sombra: true };
+  dibujarTexto(x, lineas, ot);
+  if (o.tachar) tachar(x, lineas, ot, clamp((tl - 1.3 - lineas.length * 0.2) / 0.8));
+}
+
+function textoRevista(x, o) {
+  const { texto, i, tl, tFin } = o;
+  const yBase = CAJA_REVISTA.y + CAJA_REVISTA.h;
+  const numero = (o.etq || '').trim() ? o.etq : `${String(i + 1).padStart(2, '0')} — ${String(clips.length).padStart(2, '0')}`;
+  versalitas(x, numero, CAJA_REVISTA.x, yBase + 84, 28, o.etqColor || C.jade, 'left', clamp(tl / 0.5) * clamp(tFin / 0.4));
+  if (o.numero) numeroGrande(x, o.numero, W - 80, yBase + 300, 'right', tl, tFin);
+  if (!texto.trim()) return;
+  const { lineas, tam } = ajustarTexto(x, texto, o.titulo ? 92 : 70, o.numero ? 760 : 800, 3);
+  const ot = { x: CAJA_REVISTA.x, y: yBase + 116, tam, tl: tl - 0.1, tFin };
+  dibujarTexto(x, lineas, ot);
+  if (o.tachar) tachar(x, lineas, ot, clamp((tl - 1.3 - lineas.length * 0.2) / 0.8));
+}
+
+function fondoRevista(x) {
+  x.fillStyle = C.noche2;
+  x.fillRect(0, 0, W, H);
+  const g = x.createRadialGradient(W * .8, H * .1, 0, W * .8, H * .1, 900);
+  g.addColorStop(0, 'rgba(99,214,190,.07)');
+  g.addColorStop(1, 'rgba(99,214,190,0)');
+  x.fillStyle = g;
+  x.fillRect(0, 0, W, H);
+  x.strokeStyle = C.lineaViva;
+  x.lineWidth = 2;
+  x.strokeRect(CAJA_REVISTA.x - 18, CAJA_REVISTA.y - 18, CAJA_REVISTA.w + 36, CAJA_REVISTA.h + 36);
+}
+
+function logo(x, px, py, tam, alinear, alpha, sombra) {
+  const partes = [['David ', false], ['&', true], [' Jorge', false]];
+  x.save();
+  x.globalAlpha = alpha;
+  x.textBaseline = 'alphabetic';
+  if (sombra) { x.shadowColor = 'rgba(14,9,18,.55)'; x.shadowBlur = 24; }
+  const anchos = partes.map(([t, c]) => { x.font = fuenteSerif(tam, c); return x.measureText(t).width; });
+  let cx = alinear === 'center' ? px - anchos.reduce((a, b) => a + b) / 2 : px;
+  partes.forEach(([t, c], k) => {
+    x.font = fuenteSerif(tam, c);
+    x.fillStyle = c ? C.jade : C.crema;
+    x.fillText(t, cx, py);
+    cx += anchos[k];
+  });
+  x.restore();
+}
+
+function olas(x, cx, cy, tam, prog) {
+  const s = tam / 32;
+  x.save();
+  x.translate(cx - 16 * s, cy - 16 * s);
+  x.scale(s, s);
+  x.lineWidth = 2;
+  x.lineCap = 'round';
+  x.strokeStyle = C.jade;
+  [[0, 1], [9, .6], [18, .3]].forEach(([dx, op], k) => {
+    const e = salida(clamp(prog * 1.6 - k * 0.25));
+    if (e <= 0) return;
+    x.save();
+    x.translate(dx, 0);
+    x.globalAlpha = op;
+    x.setLineDash([30, 30]);
+    x.lineDashOffset = 30 * (1 - e);
+    x.stroke(OLAS);
+    x.restore();
+  });
+  x.restore();
+}
+
+function pintarCierre(x, tl, L) {
+  x.fillStyle = C.noche;
+  x.fillRect(0, 0, W, H);
+  const g = x.createRadialGradient(W / 2, H * .44, 0, W / 2, H * .44, 820);
+  g.addColorStop(0, 'rgba(99,214,190,.13)');
+  g.addColorStop(1, 'rgba(99,214,190,0)');
+  x.fillStyle = g;
+  x.fillRect(0, 0, W, H);
+
+  const t = tl - L.d * 0.4;
+  olas(x, W / 2, H * .36, 230, clamp(t / 1.1));
+  const e = salida(clamp((t - 0.35) / 0.8));
+  if (e > 0) {
+    x.save();
+    x.translate(0, (1 - e) * 50);
+    logo(x, W / 2, H * .36 + 280, 132, 'center', e, false);
+    x.restore();
+  }
+  if (ajustes.cierre.trim()) {
+    const { lineas, tam } = ajustarTexto(x, ajustes.cierre, 44, 860, 4, 'sans');
+    dibujarTexto(x, lineas, { x: W / 2, y: H * .36 + 360, tam, fam: 'sans', color: C.crema2, inter: 1.45, alinear: 'center', tl: t - 0.8, tFin: 99 });
+  }
+  if (instaVisible()) instagram(x, W / 2, H - 470, 38, 'center', salida(clamp((t - 1.2) / 0.7)), false);
+}
+
+function pantallaVacia(x, t) {
+  const g = x.createRadialGradient(W / 2, H * .42, 0, W / 2, H * .42, 820);
+  g.addColorStop(0, 'rgba(99,214,190,.10)');
+  g.addColorStop(1, 'rgba(99,214,190,0)');
+  x.fillStyle = g;
+  x.fillRect(0, 0, W, H);
+  olas(x, W / 2, H * .38, 200, 1);
+  logo(x, W / 2, H * .38 + 250, 104, 'center', 1, false);
+  versalitas(x, 'Elige fotos y vídeos', W / 2, H * .38 + 350, 32, C.jade, 'center', .6 + .4 * Math.sin(t * 2.4));
+}
+
+/* ======================================================================
+   Vista previa
+   ====================================================================== */
+let reproduciendo = true, t0 = performance.now(), tPausa = 0, ocupado = false;
+
+function tiempoVista() {
+  const T = linea().T;
+  return reproduciendo ? ((performance.now() - t0) / 1000) % T : Math.min(tPausa, T);
+}
+
+function sincronizarVideos(t, enMarcha) {
+  const L = linea();
+  const activos = new Set(clipsActivos(t, L));
+  clips.forEach((c, i) => {
+    if (c.tipo !== 'video') return;
+    const v = c.fuente;
+    if (!activos.has(i)) { if (!v.paused) v.pause(); return; }
+    const vt = tiempoVideo(c, i, t, L);
+    const alFinal = vt >= c.dur - 0.06;
+    if (enMarcha && !alFinal) {
+      if (v.paused) { v.currentTime = vt; v.play().catch(() => {}); }
+      else if (Math.abs(v.currentTime - vt) > 0.35) v.currentTime = vt;
+    } else {
+      if (!v.paused) v.pause();
+      if (!v.seeking && Math.abs(v.currentTime - vt) > 0.04) v.currentTime = vt;
+    }
+  });
+}
+
+function reiniciarVista() {
+  t0 = performance.now();
+  tPausa = 0;
+  const T = linea().T;
+  $('barra').max = T;
+}
+
+function bucle() {
+  if (!ocupado) {
+    const t = tiempoVista();
+    sincronizarVideos(t, reproduciendo);
+    dibujar(ctx, t);
+    $('barra').value = t;
+    $('reloj').textContent = `${reloj(t)} / ${reloj(linea().T)}`;
+  }
+  requestAnimationFrame(bucle);
+}
+
+function ponerPlay(si) {
+  if (si && !reproduciendo) t0 = performance.now() - tPausa * 1000;
+  if (!si && reproduciendo) tPausa = tiempoVista();
+  reproduciendo = si;
+  $('play').textContent = si ? '❚❚' : '▶';
+  $('play').setAttribute('aria-label', si ? 'Pausa' : 'Reproducir');
+}
+$('play').addEventListener('click', () => ponerPlay(!reproduciendo));
+$('barra').addEventListener('input', e => { ponerPlay(false); tPausa = +e.target.value; });
+
+/* ======================================================================
+   Crear el vídeo
+   ----------------------------------------------------------------------
+   Lo normal: fotograma a fotograma con WebCodecs y un MP4 de verdad, más
+   rápido que el tiempo real. Si el navegador no sabe, se graba la vista
+   previa en tiempo real con MediaRecorder.
+   ====================================================================== */
+let cancelado = false;
+
+async function codecDisponible() {
+  if (!('VideoEncoder' in window) || !window.Mp4Muxer) return null;
+  for (const codec of ['avc1.640028', 'avc1.4d0028', 'avc1.640033', 'avc1.42003e']) {
+    const cfg = { codec, width: W, height: H, bitrate: 10_000_000, framerate: FPS, avc: { format: 'avc' } };
+    try { if ((await VideoEncoder.isConfigSupported(cfg)).supported) return cfg; } catch {}
+  }
+  return null;
+}
+
+function progreso(f, texto) {
+  $('progresoBarra').style.width = Math.round(f * 100) + '%';
+  if (texto) $('progresoTitulo').textContent = texto;
+}
+
+async function crearVideo() {
+  if (!clips.length || ocupado) return;
+  ocupado = true; cancelado = false;
+  clips.forEach(c => c.tipo === 'video' && c.fuente.pause());
+  $('modal').hidden = false;
+  $('cajaProgreso').hidden = false;
+  $('cajaResultado').hidden = true;
+  progreso(0, 'Un momento…');
+  let bloqueo = null;
+  try { bloqueo = await navigator.wakeLock?.request('screen'); } catch {}
+  await document.fonts.ready;
+
+  try {
+    const cfg = await codecDisponible();
+    const res = cfg ? await crearConWebCodecs(cfg) : await crearGrabando();
+    if (res) mostrarResultado(res);
+    else $('modal').hidden = true;
+  } catch (err) {
+    console.error(err);
+    $('progresoTitulo').textContent = 'No se ha podido crear';
+    $('progresoNota').textContent = 'Algo ha fallado en este navegador. Prueba con menos fotos, con una duración más corta o con Chrome actualizado. (' + (err && err.message || err) + ')';
+    $('cancelar').textContent = 'Cerrar';
+    await new Promise(r => $('cancelar').addEventListener('click', r, { once: true }));
+    $('modal').hidden = true;
+  } finally {
+    $('cancelar').textContent = 'Cancelar';
+    $('progresoNota').textContent = 'No cierres esta pantalla ni cambies de aplicación hasta que termine.';
+    try { bloqueo && bloqueo.release(); } catch {}
+    ocupado = false;
+    reiniciarVista();
+  }
+}
+
+async function crearConWebCodecs(cfg) {
+  const L = linea();
+  const total = Math.round(L.T * FPS);
+  const muxer = new Mp4Muxer.Muxer({
+    target: new Mp4Muxer.ArrayBufferTarget(),
+    video: { codec: 'avc', width: W, height: H, frameRate: FPS },
+    fastStart: 'in-memory',
+    firstTimestampBehavior: 'offset'
+  });
+  let fallo = null;
+  const enc = new VideoEncoder({
+    output: (chunk, meta) => muxer.addVideoChunk(chunk, meta),
+    error: e => { fallo = e; }
+  });
+  enc.configure(cfg);
+  const inicio = performance.now();
+
+  for (let f = 0; f < total; f++) {
+    if (cancelado) { enc.close(); return null; }
+    if (fallo) throw fallo;
+    const t = f / FPS;
+    for (const i of clipsActivos(t, L)) {
+      const c = clips[i];
+      if (c.tipo === 'video') await buscar(c.fuente, tiempoVideo(c, i, t, L));
+    }
+    dibujar(ctx, t);
+    const vf = new VideoFrame(lienzo, { timestamp: Math.round(f * 1e6 / FPS), duration: Math.round(1e6 / FPS) });
+    enc.encode(vf, { keyFrame: f % (FPS * 2) === 0 });
+    vf.close();
+    while (enc.encodeQueueSize > 4) await esperar(4);
+    if (f % 6 === 0) {
+      const hecho = (f + 1) / total;
+      const pasado = (performance.now() - inicio) / 1000;
+      const queda = f > 20 ? pasado / hecho - pasado : null;
+      progreso(hecho, queda == null ? 'Un momento…' : queda < 5 ? 'Casi está…' : `Quedan unos ${Math.ceil(queda)} s`);
+      await esperar(0);
+    }
+  }
+  progreso(1, 'Casi está…');
+  await enc.flush();
+  if (fallo) throw fallo;
+  enc.close();
+  muxer.finalize();
+  return { blob: new Blob([muxer.target.buffer], { type: 'video/mp4' }), ext: 'mp4' };
+}
+
+async function crearGrabando() {
+  if (!lienzo.captureStream || !window.MediaRecorder) throw new Error('Este navegador no puede crear vídeos');
+  const L = linea();
+  const tipos = ['video/mp4;codecs=avc1.640028', 'video/mp4;codecs=avc1', 'video/mp4', 'video/webm;codecs=vp9', 'video/webm'];
+  const mime = tipos.find(m => MediaRecorder.isTypeSupported(m)) || '';
+  const flujo = lienzo.captureStream(FPS);
+  const rec = new MediaRecorder(flujo, mime ? { mimeType: mime, videoBitsPerSecond: 10_000_000 } : undefined);
+  const trozos = [];
+  rec.ondataavailable = e => e.data.size && trozos.push(e.data);
+  const parado = new Promise(r => rec.onstop = r);
+  $('progresoNota').textContent = 'Este navegador lo graba en tiempo real: tarda lo mismo que dura el reel. No cambies de pantalla.';
+
+  // Primer fotograma listo antes de empezar a grabar
+  for (const i of clipsActivos(0, L)) { const c = clips[i]; if (c.tipo === 'video') await buscar(c.fuente, tiempoVideo(c, i, 0, L)); }
+  dibujar(ctx, 0);
+  rec.start(250);
+  const inicio = performance.now();
+  await new Promise(fin => {
+    const paso = () => {
+      const t = (performance.now() - inicio) / 1000;
+      if (cancelado || t >= L.T) return fin();
+      sincronizarVideos(t, true);
+      dibujar(ctx, t);
+      progreso(t / L.T, `Quedan ${Math.ceil(L.T - t)} s`);
+      requestAnimationFrame(paso);
+    };
+    requestAnimationFrame(paso);
+  });
+  clips.forEach(c => c.tipo === 'video' && c.fuente.pause());
+  rec.stop();
+  await parado;
+  if (cancelado) return null;
+  const tipo = rec.mimeType || mime || 'video/webm';
+  return { blob: new Blob(trozos, { type: tipo }), ext: tipo.includes('mp4') ? 'mp4' : 'webm' };
+}
+
+let urlResultado = null;
+function mostrarResultado({ blob, ext }) {
+  if (urlResultado) URL.revokeObjectURL(urlResultado);
+  urlResultado = URL.createObjectURL(blob);
+  const hoy = new Date();
+  const nombre = `reel-dyj-${hoy.getFullYear()}-${String(hoy.getMonth() + 1).padStart(2, '0')}-${String(hoy.getDate()).padStart(2, '0')}-${String(hoy.getHours()).padStart(2, '0')}${String(hoy.getMinutes()).padStart(2, '0')}.${ext}`;
+  const archivo = new File([blob], nombre, { type: blob.type });
+
+  $('resultado').src = urlResultado;
+  $('descargar').href = urlResultado;
+  $('descargar').download = nombre;
+  const mb = (blob.size / 1048576).toFixed(1).replace('.', ',');
+  $('resultadoNota').textContent = `${nombre} · ${mb} MB · vertical 1080×1920, sin sonido.` +
+    (ext === 'webm' ? ' Este navegador solo sabe hacer WebM; para Instagram es mejor crearlo con Chrome o Safari actualizados, que hacen MP4.' : '');
+
+  const puedeCompartir = navigator.canShare && navigator.canShare({ files: [archivo] });
+  $('compartir').hidden = !puedeCompartir;
+  $('compartir').onclick = () => navigator.share({ files: [archivo] }).catch(() => {});
+  $('descargar').className = puedeCompartir ? 'boton fantasma' : 'boton';
+
+  $('cajaProgreso').hidden = true;
+  $('cajaResultado').hidden = false;
+}
+
+$('crear').addEventListener('click', crearVideo);
+$('crearMovil').addEventListener('click', crearVideo);
+$('irVista').addEventListener('click', () => document.querySelector('.vista').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+$('cancelar').addEventListener('click', () => { cancelado = true; });
+$('cerrar').addEventListener('click', () => { $('modal').hidden = true; $('resultado').pause(); });
+
+/* ======================================================================
+   Arranque
+   ====================================================================== */
+if (!TIPOS[ajustes.tipo]) ajustes.tipo = 'libre';
+pintarTipos();
+pintarDuraciones();
+pintarEstilos();
+pintarLista();
+reiniciarVista();
+Promise.all([
+  document.fonts.load(fuenteSerif(100)), document.fonts.load(fuenteSerif(100, true)),
+  document.fonts.load(fuenteSans(40)), document.fonts.load(fuenteSans(30, 500))
+]).catch(() => {}).finally(() => requestAnimationFrame(bucle));
+</script>
+</body>
+</html>
