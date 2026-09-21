@@ -258,9 +258,9 @@ textarea { resize: vertical; min-height: 48px; }
     <div class="paso">
       <p class="etiqueta"><b>3</b> · Fotos y vídeos</p>
       <label class="soltar" id="soltar">
-        <input type="file" id="archivos" class="oculto" accept="image/*,video/*" multiple>
+        <input type="file" id="archivos" class="oculto" accept="image/*,video/*,.heic,.heif" multiple>
         <span class="boton">Elegir fotos y vídeos</span>
-        <small>Salen en el orden en que los elijas. En el ordenador también puedes arrastrarlos aquí.</small>
+        <small>Salen en el orden en que los elijas. Valen JPG, PNG, HEIC del móvil y vídeos MP4 o MOV. En el ordenador también puedes arrastrarlos aquí.</small>
       </label>
       <p class="estado-carga" id="estadoCarga" role="status"></p>
       <ol class="lista" id="lista"></ol>
@@ -425,7 +425,34 @@ function lienzoNuevo(w, h) { const c = document.createElement('canvas'); c.width
 /* ======================================================================
    Cargar fotos y vídeos
    ====================================================================== */
+// Las fotos HEIC (las del iPhone y las de muchos Samsung) solo las abre
+// Safari. En los demás navegadores se traducen a JPG aquí mismo, con un
+// descifrador que solo se descarga cuando hace falta (pesa 1,3 MB).
+const esHeic = f => /image\/hei[cf]/i.test(f.type) || /\.(heic|heif)$/i.test(f.name);
+let descifradorHeic = null;
+function cargarDescifradorHeic() {
+  if (!descifradorHeic) descifradorHeic = new Promise((ok, ko) => {
+    const s = document.createElement('script');
+    s.src = 'heic.js';
+    s.onload = () => window.heic2any ? ok(window.heic2any) : ko(new Error('heic'));
+    s.onerror = () => { descifradorHeic = null; ko(new Error('Hace falta conexión a internet la primera vez que abres una foto HEIC')); };
+    document.head.appendChild(s);
+  });
+  return descifradorHeic;
+}
+
 async function cargarFoto(archivo) {
+  try {
+    return await desdeImagen(archivo);
+  } catch (e) {
+    if (!esHeic(archivo)) throw e;
+  }
+  const heic2any = await cargarDescifradorHeic();
+  const jpg = await heic2any({ blob: archivo, toType: 'image/jpeg', quality: 0.92 });
+  return desdeImagen(Array.isArray(jpg) ? jpg[0] : jpg);
+}
+
+async function desdeImagen(archivo) {
   const url = URL.createObjectURL(archivo);
   try {
     const img = new Image();
@@ -489,9 +516,11 @@ async function anadirArchivos(lista) {
   const estado = $('estadoCarga');
   estado.classList.remove('aviso');
   const fallos = [];
+  let motivo = '';
   for (let i = 0; i < archivos.length; i++) {
     const f = archivos[i];
-    estado.textContent = `Preparando ${i + 1} de ${archivos.length}…`;
+    estado.textContent = `Preparando ${i + 1} de ${archivos.length}…` +
+      (esHeic(f) ? ' Las fotos HEIC tardan un poco más.' : '');
     try {
       const esVideo = f.type.startsWith('video/') || /\.(mov|mp4|m4v)$/i.test(f.name);
       const datos = esVideo ? await cargarVideo(f) : await cargarFoto(f);
@@ -499,15 +528,16 @@ async function anadirArchivos(lista) {
         id: ++contadorId, nombre: f.name, texto: '', desde: 0,
         entera: datos.ancho > datos.alto * 1.05   // las apaisadas, enteras con fondo difuminado
       }, datos));
-    } catch {
+    } catch (e) {
       fallos.push(f.name);
+      if (e && e.message && esHeic(f)) motivo = e.message;
     }
     pintarLista();
   }
   if (fallos.length) {
     estado.classList.add('aviso');
     estado.textContent = `No se ${fallos.length > 1 ? 'han' : 'ha'} podido abrir: ${fallos.join(', ')}. ` +
-      (fallos.some(n => /\.hei[cf]$/i.test(n)) ? 'Las fotos HEIC del iPhone no se abren en el ordenador: pásalas a JPG o elígelas desde el propio iPhone.' : 'Puede que el formato no sea compatible con este navegador.');
+      (motivo || 'Puede que el formato no sea compatible con este navegador.');
   } else {
     estado.textContent = '';
   }

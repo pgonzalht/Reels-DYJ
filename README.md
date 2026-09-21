@@ -11,5 +11,9 @@ fotos y los vídeos no salen del dispositivo.
 - **Probar en local:** `node fuente/servir.mjs` → http://localhost:5178
 - **Iconos:** `powershell -File fuente/iconos.ps1`
 
+Formatos que acepta: JPG, PNG, WEBP, HEIC/HEIF (se traducen a JPG en el propio
+navegador con `heic.js`, que solo se descarga cuando hace falta) y vídeos MP4 o
+MOV.
+
 Tipos de reel: libre, antes y después, paso a paso, consejos, mito o realidad y
 opiniones. Estilos: suave, dinámico y revista.
